@@ -159,7 +159,7 @@ section{padding:96px 0}
 .heat-note strong{color:var(--navy)}
 @media(max-width:860px){.heat{grid-template-columns:1fr}}
 
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 @media(max-width:960px){.grid3{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.grid3{grid-template-columns:1fr}}
 .cs{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px;transition:transform .2s,box-shadow .2s}
@@ -278,7 +278,7 @@ footer p{margin:4px 0}
     <div class="stats">
       <div class="stat"><b>13</b><span>GRC School days completed at Orbyt</span></div>
       <div class="stat"><b>16</b><span>Risks in a live, formula driven register</span></div>
-      <div class="stat"><b>6</b><span>Standalone cybersecurity case studies</span></div>
+      <div class="stat"><b>4</b><span>Standalone cybersecurity case studies</span></div>
       <div class="stat"><b>Sec+</b><span>CompTIA Security+ certified</span></div>
     </div>
   </div>
@@ -369,7 +369,7 @@ footer p{margin:4px 0}
     <div class="head">
       <div class="eyebrow">Case Studies</div>
       <h2>Standalone portfolio work.</h2>
-      <p class="lead">Full case studies built against real frameworks. Most use fictional organisations; the phishing analysis is based on a real, publicly documented incident. The full documents are in my GitHub repository.</p>
+      <p class="lead">Full case studies built against real frameworks, using fictional or composite organisations. Open any report to read it in full.</p>
     </div>
     <div class="grid3" id="cases"></div>
   </div>
@@ -513,18 +513,16 @@ function play(dt){
       setTimeout(()=>{ty.className='typing';b.classList.add('show')},1100)},900)},1100);
 }
 TERMS.forEach((t,i)=>{const b=document.createElement('button');b.className='tab';b.setAttribute('role','tab');b.innerHTML=`${t.name} · ${t.title}<span class="state">${t.state}</span>`;b.onclick=()=>render(i);tabs.appendChild(b)});
-render(1);
+render(0);
 
 const REPO="https://github.com/rewardolagboye/Cybersecurity-Portfolio";
 const CASES=[
- {k:"Risk Assessment",t:"NIST CSF Risk Register",org:"Alderbridge Financial Services Ltd",d:"A full risk register and assessment report for a fictional financial services firm, structured around the NIST Cybersecurity Framework functions.",tags:["NIST CSF","Risk register"]},
- {k:"Policy Review",t:"Password and Authentication Policy Review",org:"",d:"A password and authentication policy reviewed and benchmarked against NIST SP 800 63B and ISO 27001, with clear recommendations for change.",tags:["NIST SP 800 63B","ISO 27001"]},
- {k:"Data Protection",t:"DPIA Mapped to the NCSC CAF",org:"",d:"A data protection impact assessment that links privacy risk to the NCSC Cyber Assessment Framework, so data protection and cyber resilience are assessed together.",tags:["UK GDPR","DPIA","NCSC CAF"]},
- {k:"Payment Security",t:"PCI DSS SAQ A Gap Analysis",org:"Willowmere Home & Living",d:"A gap analysis for a small online merchant against PCI DSS v4.0.1 Self Assessment Questionnaire A, setting out each gap and what the merchant must do to close it.",tags:["PCI DSS v4.0.1","SAQ A","Gap analysis"]},
- {k:"Threat Analysis",t:"Phishing Email Analysis",org:"Based on SANS ISC diary 27082",d:"Header forensics, attack chain reconstruction, an IOC table and MITRE ATT&CK mapping for a real, publicly documented phishing incident, with the source cited.",tags:["MITRE ATT&CK","IOCs","Email forensics"]},
- {k:"Assurance",t:"Stage Gate Assurance Review",org:"Meridian Community Retail",d:"Project and programme assurance modelled on the UK Government Gate Review process, with a RAID log and a sample stage gate review report.",tags:["Gate reviews","RAID log","Assurance"]}
+ {k:"Risk Assessment",t:"NIST CSF Risk Register",org:"Alderbridge Financial Services Ltd",d:"A full risk register and assessment report for a fictional financial services firm, structured around the NIST Cybersecurity Framework functions.",tags:["NIST CSF","Risk register"],f:"NIST CSF Risk Register and Assessment Report.pdf",pg:10},
+ {k:"Policy Review",t:"Password and Authentication Policy Review",org:"Alderbridge Financial Services Ltd",d:"A structured gap review of a password and authentication policy against NIST, CIS and ISO 27001 benchmarks, with clear recommendations for change.",tags:["NIST SP 800 63B","CIS","ISO 27001"],f:"Password and Authentication Policy Review.pdf",pg:10},
+ {k:"Data Protection",t:"DPIA: Eleven Staff, One Trust",org:"Ashcombe Integrated Care System (composite)",d:"A data protection impact assessment of a regional shared care record across general practice, mental health and social care, told through one patient's story and mapped to the NCSC Cyber Assessment Framework through DSPT Category 1.",tags:["UK GDPR","DPIA","NCSC CAF","DSPT"],f:"DPIA Shared Care Record NCSC CAF.pdf",pg:7},
+ {k:"Payment Security",t:"PCI DSS SAQ A Gap Analysis",org:"Willowmere Home & Living",d:"A 22 control self assessment for a small online merchant against PCI DSS v4.0.1 Self Assessment Questionnaire A, setting out each gap and what the merchant must do to close it.",tags:["PCI DSS v4.0.1","SAQ A","Gap analysis"],f:"PCI DSS SAQ A Gap Analysis.pdf",pg:13}
 ];
-document.getElementById('cases').innerHTML=CASES.map(c=>`<article class="cs"><div class="kind">${esc(c.k)}</div><h3>${esc(c.t)}</h3>${c.org?`<div style="font-size:13px;color:var(--muted);margin-top:-6px">${esc(c.org)}</div>`:''}<p>${esc(c.d)}</p><div class="tags">${c.tags.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div><a class="more" href="${REPO}">View on GitHub →</a></article>`).join('');
+document.getElementById('cases').innerHTML=CASES.map(c=>`<article class="cs"><div class="kind">${esc(c.k)}</div><h3>${esc(c.t)}</h3>${c.org?`<div style="font-size:13px;color:var(--muted);margin-top:-6px">${esc(c.org)}</div>`:''}<p>${esc(c.d)}</p><div class="tags">${c.tags.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div><a class="more" href="docs/${encodeURIComponent(c.f)}">📎 Read the report (PDF, ${c.pg} pages)</a></article>`).join('');
 
 const ICON='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e3c578" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>';
 const LABS=[
